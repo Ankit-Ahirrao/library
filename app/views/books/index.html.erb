@@ -1,2 +1,11 @@
-List all the books created!
-
+<% if @books.any? %>
+  <% @books.each do |book| %>
+  <ul>
+    <li>
+      <%= link_to book.title, book_url(book) %>
+    </li>
+  </ul>
+  <% end %>
+<% else %>
+  Books not available
+<% end %>
