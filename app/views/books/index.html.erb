@@ -2,7 +2,8 @@
   <% @books.each do |book| %>
   <ul>
     <li>
-      <%= link_to book.title, book_url(book) %>
+      <%= link_to book.title, book_url(book) %> | 
+      <%= link_to "Delete book", book_path(book), method: :delete %>
     </li>
   </ul>
   <% end %>
