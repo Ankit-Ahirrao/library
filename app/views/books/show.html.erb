@@ -1,7 +1,15 @@
 <div class="container">
-  <h1><%= @book.title %><h1>
-  <h3>Author: <%= @book.author %></h3>
-  <p>Description: <%= @book.description %></p>
+  <p><strong>Title:</strong><%= @book.title %><p>
+  <p><strong>Author:</strong> <%= @book.author %></p>
+  <p><strong>Description:</strong> <%= @book.description %></p>
 <div>
 
-<%= link_to "Issue book" %>
+<% if admin? %>
+  <%= link_to "Edit book", edit_book_path(@book), class: "btn-primary" %> | 
+  <%= link_to "Delete book", book_path(@book), method: :delete, class: "btn-primary" %>
+<% else %>
+  <%= link_to "Request book", "#", class: "btn-primary" %>
+<% end %>
+
+|
+<%= link_to "Back", books_path, class: "btn-primary" %>

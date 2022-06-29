@@ -1,4 +1,4 @@
-<h3>Books List</h3>
+<h3>Book Lists</h3>
 <br>
 <% if @books.any? %>
   <%= will_paginate %>
@@ -6,9 +6,6 @@
     <% @books.each do |book| %>
       <li>
         <%= link_to book.title, book_url(book) %>
-        <% if admin? %> | 
-          <%= link_to "Delete book", book_path(book), method: :delete %>
-        <% end %>
       </li>
       <br>
     <% end %>
