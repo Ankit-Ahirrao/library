@@ -1,9 +1,13 @@
+<h3>Books List</h3>
+<br>
 <% if @books.any? %>
   <% @books.each do |book| %>
   <ul>
     <li>
-      <%= link_to book.title, book_url(book) %> | 
-      <%= link_to "Delete book", book_path(book), method: :delete %>
+      <%= link_to book.title, book_url(book) %>
+      <% if admin? %> | 
+        <%= link_to "Delete book", book_path(book), method: :delete %>
+      <% end %>
     </li>
   </ul>
   <% end %>

@@ -1,0 +1,8 @@
+<h3>Welcome, <%= current_user.name %></h3>
+<br><br>
+<% if admin? %>
+  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
+  <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
+<% else %>
+  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
+<% end %>

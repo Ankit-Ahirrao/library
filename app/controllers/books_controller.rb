@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  #before_action :check_admin, only: [:new, :edit, :destory]
+  before_action :admin?, only: [:new, :edit, :destory]
 
 
   def index 
@@ -8,14 +8,23 @@ class BooksController < ApplicationController
   end
 
   def show 
+    @book = Book.find(params[:id])
   end
 
   def new
-    @book = current_user.books.build
+    if admin?
+      @book = current_user.books.build
+    else
+      redirect_to books_url, notice: "Only Admins can create book" 
+    end
   end
 
   def edit 
-    @book = current_user.books.find(params[:id])
+    if admin?
+      @book = current_user.books.find(params[:id])
+    else 
+      redirect_to book_url, notice: "Only Admins can edit book details"
+    end
   end
 
   def create
@@ -37,13 +46,15 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    current_user.books.find(params[:id]).destroy
-    redirect_to books_url, notice: "Book is destroyed"
+    if admin? 
+      current_user.books.find(params[:id]).destroy
+      redirect_to books_url, notice: "Book is destroyed"
+    else
+      redirect_to books_url, notice: "Only Admins can delete books"
+    end
   end
 
-  def check_admin 
-    current_user.is_admin
-  end
+
 
   private
     def book_params
