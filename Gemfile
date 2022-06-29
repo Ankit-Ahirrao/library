@@ -10,6 +10,10 @@ gem 'pg', '~> 1.1'
 
 gem 'bootstrap-sass'
 
+gem 'will_paginate'
+
+gem 'bootstrap-will_paginate'
+
 gem 'devise'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
