@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_172300) do
+ActiveRecord::Schema.define(version: 2022_06_30_075931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_banks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_banks_on_book_id"
+    t.index ["user_id"], name: "index_book_banks_on_user_id"
+  end
+
+  create_table "book_issues", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_issues_on_book_id"
+    t.index ["user_id"], name: "index_book_issues_on_user_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -39,5 +57,9 @@ ActiveRecord::Schema.define(version: 2022_06_28_172300) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "book_banks", "books"
+  add_foreign_key "book_banks", "users"
+  add_foreign_key "book_issues", "books"
+  add_foreign_key "book_issues", "users"
   add_foreign_key "books", "users"
 end

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :admin?, only: [:new, :edit, :destory]
+  #before_action :admin?, only: [:new, :edit, :destory]
+  
 
 
   def index 
@@ -54,6 +55,35 @@ class BooksController < ApplicationController
     end
   end
 
+=begin
+  def bookbank 
+    @book = Book.find(params[:id])
+    type = params[:type]
+
+    if type == "issue"
+      current_user.book_requests << @book 
+      redirect_to book_path(@book), notice: "Book request sent to admin for approval"
+    elsif type == "cancel"
+      current_user.book_requests.delete(@book)
+      redirect_to book_path(@book), notice: "Book request cancelled successfully"
+    else
+       redirect_to books_url
+    end
+  end
+
+=end
+
+  def issue_book_request
+    @book = Book.find(params[:id])
+    current_user.book_requests << @book 
+    redirect_to book_path(@book), notice: "Book request sent to admin for approval"
+  end
+
+  def cancel_book_request
+    @book = Book.find(params[:id])
+    current_user.book_requests.delete(@book)
+    redirect_to book_path(@book), notice: "Book request cancelled successfully"
+  end
 
 
   private

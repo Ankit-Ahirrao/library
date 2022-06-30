@@ -1,0 +1,12 @@
+<div class="container">
+  <ul>
+    <% @book_issue_requests.each do |request| %>
+      <li>
+        User id: <%= request.user_id %> | 
+        Book id: <%= request.book_id %> |
+      </li>
+    <%end%>
+  </ul>
+</div>
+
+

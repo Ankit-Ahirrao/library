@@ -1,0 +1,4 @@
+<%= form_with(model: current_user.book_banks.find_by(book_id: @book.id),
+  html: { method: :delete }, local: true) do |f| %>
+  <%= f.submit "Cancel", class: "btn" %>
+<% end %>

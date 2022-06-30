@@ -8,7 +8,7 @@
   <%= link_to "Edit book", edit_book_path(@book), class: "btn-primary" %> | 
   <%= link_to "Delete book", book_path(@book), method: :delete, class: "btn-primary" %>
 <% else %>
-  <%= link_to "Request book", "#", class: "btn-primary" %>
+  <%= render 'request' %>
 <% end %>
 
 |
