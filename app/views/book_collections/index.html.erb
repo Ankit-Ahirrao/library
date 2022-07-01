@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @all_requests.each do |request| %>
+      <% @book_collections.each do |request| %>
         <tr>
           <td><%= request.book.id %></td>
           <td><%= link_to request.book.title, book_path(request.book.id) %></td>
