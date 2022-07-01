@@ -3,7 +3,7 @@
     <% @book_issue_requests.each do |request| %>
       <li>
         
-        Book  <%= request.book_id %> requested by User <%= request.user_id %> 
+        Book  <%=link_to request.book.title, book_path(request.book.id) %> requested by User <%= request.user.name %> 
       </li>
     <%end%>
   </ul>

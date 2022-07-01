@@ -2,20 +2,24 @@
 <br>
 <% if admin? %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <%= link_to "Check books requested by students", book_banks_path, class: "btn-sm btn-primary"%>
+  <%= link_to "Book approval request", book_banks_path, class: "btn-sm btn-primary"%>
   <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
-<% else %>
+<% elsif !admin? && current_user.book_requests.count > 0 %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
   <br><br>
   <strong>List of book ids requested by you! </strong>
   <br>
   <div class="container">
     <ul>
-      <% current_user.book_banks.each do |book| %>
+      <% current_user.book_banks.each do |book| %><br>
         <li>
           <%= link_to "Click me to get book details: #{book.book_id}", book_path(book) %>
         </li>
       <% end %>
     <ul>
   </div>
+<% else %>
+  <strong>You don't have any requested book. Issue books from the list.</strong><br><br>
+  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
+  <br><br>
 <% end %>
