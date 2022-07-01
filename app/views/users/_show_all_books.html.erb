@@ -2,7 +2,7 @@
 <br>
 <% if admin? %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <%= link_to "Book approval request", student_requests_path, class: "btn-sm btn-primary"%>
+  <%= link_to "Book approval request", book_collections_path, class: "btn-sm btn-primary"%>
   <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
 <% elsif !admin? && current_user.book_requests.count > 0 %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
