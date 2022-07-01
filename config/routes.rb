@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'student_requests', to: "requests#index" do
+    member do 
+      get 'approve', to: "requests#approve_book_request" 
+      get 'reject', to: "requests#reject_book_request"
+      get 'pending', to: "requests#pending_book_request"
+    end
+  end
   get 'book_banks', to: "book_banks#index"
   root 'static_pages#home'
   devise_for :users 

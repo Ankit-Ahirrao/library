@@ -75,13 +75,13 @@ class BooksController < ApplicationController
 
   def issue_book_request
     @book = Book.find(params[:id])
-    current_user.book_requests << @book
+    current_user.requests << @book
     redirect_to book_path(@book), notice: "Book request sent to admin for approval"
   end
 
   def cancel_book_request
     @book = Book.find(params[:id])
-    current_user.book_requests.delete(@book)
+    current_user.requests.delete(@book)
     redirect_to book_path(@book), notice: "Book request cancelled successfully"
   end
 

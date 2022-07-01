@@ -3,4 +3,5 @@ class BookBanksController < ApplicationController
   def index
    @book_issue_requests = BookBank.all
   end
+
 end

@@ -4,7 +4,7 @@ class BookBank < ApplicationRecord
 
   VALID_STATUSES = ['pending', 'approved', 'rejected']
 
-  validates :status, inclusion: { in: VALID_STATUSES }
+  #validates :status, inclusion: { in: VALID_STATUSES }
 
   def pending?
     status == 'pending'
