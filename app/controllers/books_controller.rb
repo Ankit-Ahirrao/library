@@ -87,14 +87,16 @@ class BooksController < ApplicationController
 
   def approve_book_request
     @book = Book.find(params[:id])
+    @book.update_attribute(:status, "approved")
     current_user.book_requests << @book
-    redirect_to book_path(@book), notice: "Book request sent to admin for approval"
+    redirect_to book_path(@book), notice: "Book request is approved"
   end
 
   def reject_book_request
     @book = Book.find(params[:id])
+    @book.update_attribute(:status, "rejected")
     current_user.book_requests.delete(@book)
-    redirect_to book_path(@book), notice: "Book request cancelled successfully"
+    redirect_to book_path(@book), notice: "Book request is rejected"
   end
 
   private

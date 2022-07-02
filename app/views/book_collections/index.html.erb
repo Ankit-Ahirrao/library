@@ -15,12 +15,28 @@
     <tbody>
       <% @book_collections.each do |request| %>
         <tr>
-          <td><%= request.book.id %></td>
-          <td><%= link_to request.book.title, book_path(request.book.id) %></td>
-          <td><%= request.user.name %></td>
-          <td><%= request.created_at %></td>
-          <td><%= link_to "Approve", "#" %></td>
-          <td><%= link_to "Reject", "#" %></td>
+          <% if request.book.status == 'pending' %>
+            <td><%= request.book.id %></td>
+            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+            <td><%= request.user.name %></td>
+            <td><%= request.created_at %></td>
+            <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
+            <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
+          <% elsif request.book.status == 'approved' %>
+            <td><%= request.book.id %></td>
+            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+            <td><%= request.user.name %></td>
+            <td><%= request.created_at %></td>
+            <td><%= link_to "Approve", "#" %></td>
+            <td><%= link_to "Reject", "#" %></td>
+          <% else %>
+            <td><%= request.book.id %></td>
+            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+            <td><%= request.user.name %></td>
+            <td><%= request.created_at %></td>
+            <td><%= link_to "Approve", "#" %></td>
+            <td><%= link_to "Reject", "#" %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

@@ -4,22 +4,37 @@
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
   <%= link_to "Book approval request", book_collections_path, class: "btn-sm btn-primary"%>
   <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
+
 <% elsif !admin? && current_user.book_requests.count > 0 %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
   <br><br>
-  <strong>List of book ids requested by you! </strong>
   <br>
   <div class="container">
     <ul>
-      <% current_user.requests.each do |book| %><br>
+    <strong>List of book requested by you </strong>
+      <% current_user.book_requests.each do |book| %><br>
         <li>
-          <%= link_to "Click me to get book details: #{book.book_id}", book_path(book) %>
+          <% if book.status == 'pending' %>
+            <%= link_to book.title %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <ul>
+    <strong>List of book approved! </strong>
+      <% current_user.book_requests.each do |book| %><br>
+        <li>
+          <% if book.status == 'approved' %>
+            <%= link_to book.title %>
+          <% end %>
         </li>
       <% end %>
     <ul>
   </div>
+
 <% else %>
   <strong>You don't have any requested book. Issue books from the list.</strong><br><br>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
   <br><br>
+  
 <% end %>

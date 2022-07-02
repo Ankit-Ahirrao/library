@@ -6,6 +6,20 @@ class Book < ApplicationRecord
   validates :author, presence: true, length: {maximum: 50}
   validates :description, presence: true, length: {maximum: 200}
 
+  VALID_STATUSES = ['approved', 'rejected', 'pending']
 
+  validates :status, inclusion: { in: VALID_STATUSES }
+
+  def approved?
+    status == 'approved'
+  end
+
+  def rejected?
+    status == 'rejected'
+  end
+
+  def pending?
+    status == 'pending'
+  end
 
 end
