@@ -55,24 +55,6 @@ class BooksController < ApplicationController
     end
   end
 
-=begin
-  def bookbank 
-    @book = Book.find(params[:id])
-    type = params[:type]
-
-    if type == "issue"
-      current_user.book_requests << @book 
-      redirect_to book_path(@book), notice: "Book request sent to admin for approval"
-    elsif type == "cancel"
-      current_user.book_requests.delete(@book)
-      redirect_to book_path(@book), notice: "Book request cancelled successfully"
-    else
-       redirect_to books_url
-    end
-  end
-
-=end
-
   def issue_book_request
     @book = Book.find(params[:id])
     current_user.book_requests << @book
@@ -101,6 +83,6 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :author, :description)
+      params.require(:book).permit(:title, :author, :description, :status)
     end
 end

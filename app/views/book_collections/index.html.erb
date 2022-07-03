@@ -1,5 +1,11 @@
 <br><br>
 <strong>Book approval requests</strong><br><br>
+<%= form_with model: @book do |form| %>
+  <div class="container">
+    <%= form.label :status %><br>
+    <%= form.select :status, ['pending', 'approved', 'rejected'], selected: 'pending' %>
+  </div>
+<%end%>
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
