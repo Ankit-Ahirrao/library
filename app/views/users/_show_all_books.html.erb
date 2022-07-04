@@ -31,6 +31,16 @@
         </li>
       <% end %>
     <ul>
+    <ul>
+    <strong>List of rejected books </strong>
+      <% current_user.book_requests.each do |book| %><br>
+        <li>
+          <% if book.status == 'rejected' %>
+            <%= link_to book.title %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
 <% else %>

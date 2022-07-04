@@ -1,3 +1,4 @@
+<h2>Approved Requests</h2>
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -6,19 +7,17 @@
         <th scope="col">Book Title</th>
         <th scope="col">User</th>
         <th scope="col">Date</th>
-        <th scope="col">Want to approve?</th>
-        <th scope="col">Want to reject?</th>
       </tr>
     </thead>
     <tbody>
       <% @book_collections.each do |request| %>
         <tr>
-          <td><%= request.book.id %></td>
-          <td><%= link_to request.book.title, book_path(request.book.id) %></td>
-          <td><%= request.user.name %></td>
-          <td><%= request.created_at %></td>
-          <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
-          <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
+          <% if request.book.issue_request && request.book.status == "approved" %>
+            <td><%= request.book.id %></td>
+            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+            <td><%= request.user.name %></td>
+            <td><%= request.created_at %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

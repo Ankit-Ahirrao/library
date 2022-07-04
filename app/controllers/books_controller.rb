@@ -55,11 +55,13 @@ class BooksController < ApplicationController
   end
 
   def issue_book_request
+    @book.update_attribute(:issue_request, true)
     current_user.book_requests << @book
     redirect_to book_path(@book), notice: "Book request sent to admin for approval"
   end
 
   def cancel_book_request
+    @book.update_attribute(:issue_request, false)
     current_user.book_requests.delete(@book)
     redirect_to book_path(@book), notice: "Book request cancelled successfully"
   end
@@ -73,7 +75,7 @@ class BooksController < ApplicationController
   def reject_book_request
     @book.update_attribute(:status, "rejected")
     current_user.book_requests.delete(@book)
-    redirect_to book_path(@book), notice: "Book request is rejected"
+    redirect_to book_collections_path, notice: "Book request is rejected"
   end
 
   private

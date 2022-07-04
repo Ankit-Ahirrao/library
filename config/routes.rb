@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'book_collections', to: "book_collections#index"
+  get 'book_collections', to: "book_collections#index" do 
+    get 'approved_books'
+  end
   root 'static_pages#home'
   devise_for :users 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
