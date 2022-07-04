@@ -1,16 +1,17 @@
-<h3>Book Lists</h3>
-<br>
-<% if @books.any? %>
-  <%= will_paginate %>
-  <ul> 
-    <% @books.each do |book| %>
-      <li>
-        <%= link_to book.title, book_url(book) %>
-      </li>
-      <br>
-    <% end %>
-  </ul>
-  <%= will_paginate %>
-<% else %>
-  Books not available
-<% end %>
+<div class="container">
+  <h2><strong>Book Lists</strong></h2><br>
+  <% if @books.any? %>
+    <%= will_paginate %>
+    <ul> 
+      <% @books.each do |book| %>
+        <li>
+          <%= link_to book.title, book_url(book) %>
+        </li>
+        <br>
+      <% end %>
+    </ul>
+    <%= will_paginate %>
+  <% else %>
+    Books not available. Please some books.
+  <% end %>
+</div>
