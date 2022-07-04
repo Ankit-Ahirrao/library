@@ -1,8 +1,8 @@
 <br><br>
-<strong>Book approval requests</strong><br><br>
+<h2><strong>Book Approval Requests</strong></h2><br><br>
 <%= form_with model: @book do |form| %>
   <div class="container">
-    <%= form.label :status %><br>
+    <%= form.label :status, class: "logg"%><br>
     <%= form.select :status, ['pending', 'approved', 'rejected'], selected: 'pending' %>
   </div>
 <%end%>
@@ -21,28 +21,12 @@
     <tbody>
       <% @book_collections.each do |request| %>
         <tr>
-          <% if request.book.status == 'pending' %>
-            <td><%= request.book.id %></td>
-            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
-            <td><%= request.user.name %></td>
-            <td><%= request.created_at %></td>
-            <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
-            <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
-          <% elsif request.book.status == 'approved' %>
-            <td><%= request.book.id %></td>
-            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
-            <td><%= request.user.name %></td>
-            <td><%= request.created_at %></td>
-            <td><%= link_to "Approve", "#" %></td>
-            <td><%= link_to "Reject", "#" %></td>
-          <% else %>
-            <td><%= request.book.id %></td>
-            <td><%= link_to request.book.title, book_path(request.book.id) %></td>
-            <td><%= request.user.name %></td>
-            <td><%= request.created_at %></td>
-            <td><%= link_to "Approve", "#" %></td>
-            <td><%= link_to "Reject", "#" %></td>
-          <% end %>
+          <td><%= request.book.id %></td>
+          <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+          <td><%= request.user.name %></td>
+          <td><%= request.created_at %></td>
+          <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
+          <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
         </tr>
       <% end %>
     </tbody>

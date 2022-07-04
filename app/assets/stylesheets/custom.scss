@@ -24,6 +24,19 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
+#log {
+  text-align: left;
+  font-size: 2em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  margin-left: 7%;
+}
+
+.login .signup .fp {
+  text-align: center;
+  margin-left: 16%;
+}
+
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
@@ -114,26 +127,39 @@ footer {
   } 
 }
 
-input, textarea, select, .uneditable-input {
+.logg {
+  margin-left: 0%;
+}
+
+ textarea {
   border: 1px solid #bbb;
   width: 20%;
   margin-bottom: 15px;
   margin-left: 220px;
 }
-input {
-  height: auto !important;
-  margin-left: 220px;
+
+.rem{
+  margin-left: 0%;
 }
 
 label {
   margin-left: 220px
 }
 
+h4{
+  margin-left: 28%;
+}
 .btn{
-  width: 40%;
-  margin-left: 170px;
+  width: 13%;
+  margin-top: 10px;
+  margin-left: 270px;
 }
 
+.btn-su{
+  width: 13%;
+  margin-top: 10px;
+  margin-left: 200px;
+}
 #error_explanation {
   color: red;
   ul {
