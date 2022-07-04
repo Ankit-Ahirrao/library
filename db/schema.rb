@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2022_07_02_150958) do
     t.index ["user_id"], name: "index_book_collections_on_user_id"
   end
 
+  create_table "book_issues", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_issues_on_book_id"
+    t.index ["user_id"], name: "index_book_issues_on_user_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -72,6 +81,8 @@ ActiveRecord::Schema.define(version: 2022_07_02_150958) do
   add_foreign_key "book_banks", "users"
   add_foreign_key "book_collections", "books"
   add_foreign_key "book_collections", "users"
+  add_foreign_key "book_issues", "books"
+  add_foreign_key "book_issues", "users"
   add_foreign_key "books", "users"
   add_foreign_key "requests", "books"
   add_foreign_key "requests", "users"

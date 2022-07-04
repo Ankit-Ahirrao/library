@@ -1,0 +1,26 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Book ID</th>
+        <th scope="col">Book Title</th>
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        <th scope="col">Want to approve?</th>
+        <th scope="col">Want to reject?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @book_collections.each do |request| %>
+        <tr>
+          <td><%= request.book.id %></td>
+          <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+          <td><%= request.user.name %></td>
+          <td><%= request.created_at %></td>
+          <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
+          <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
