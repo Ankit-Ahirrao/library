@@ -66,7 +66,7 @@ class BooksController < ApplicationController
 
   def approve_book_request
     @book.update_attribute(:status, "approved")
-    current_user.book_approved << @book
+    current_user.book_requests << @book
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
