@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2022_07_04_101100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "book_banks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
+    t.index ["book_id"], name: "index_book_banks_on_book_id"
+    t.index ["user_id"], name: "index_book_banks_on_user_id"
+  end
+
   create_table "book_collections", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
@@ -36,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_07_04_101100) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_requests_on_book_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -50,7 +69,11 @@ ActiveRecord::Schema.define(version: 2022_07_04_101100) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "book_banks", "books"
+  add_foreign_key "book_banks", "users"
   add_foreign_key "book_collections", "books"
   add_foreign_key "book_collections", "users"
   add_foreign_key "books", "users"
+  add_foreign_key "requests", "books"
+  add_foreign_key "requests", "users"
 end
