@@ -4,6 +4,10 @@ class BookCollectionsController < ApplicationController
     @book_collections = BookCollection.all
   end
 
+  def show
+    @book_collections = BookCollection.all
+  end
+
   def get_status 
     @book_statues = Book.includes(:user).where(params[:status])
   end
