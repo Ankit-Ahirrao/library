@@ -8,41 +8,9 @@
 
 <% elsif !admin? && current_user.book_requests.count > 0 %>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <br><br>
-  <br>
-  <div class="container">
-    <ul>
-    <strong>List of book requested by you </strong>
-      <% current_user.book_requests.each do |book| %><br>
-        <li>
-          <% if book.status == 'pending' %>
-            <%= link_to book.title %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-    <ul>
-    <strong>List of book approved! </strong>
-      <% current_user.book_requests.each do |book| %><br>
-        <li>
-          <% if book.status == 'approved' %>
-            <%= link_to book.title %>
-          <% end %>
-        </li>
-      <% end %>
-    <ul>
-    <ul>
-    <strong>List of rejected books </strong>
-      <% current_user.book_requests.each do |book| %><br>
-        <li>
-          <% if book.status == 'rejected' %>
-            <%= link_to book.title %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
+  <br><br><br>
+  <%= render 'users/show_request' %>
+  
 <% else %>
   <strong>You don't have any requested book. Issue books from the list.</strong><br><br>
   <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>

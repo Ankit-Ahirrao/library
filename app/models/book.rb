@@ -6,11 +6,8 @@ class Book < ApplicationRecord
   validates :author, presence: true, length: {maximum: 50}
   validates :description, presence: true, length: {maximum: 200}
 
-  enum :status, {
-    pending: 0,
-    approved: 1,
-    rejected: 2
-  },
-  default: :pending
+  VALID_STATUSES = ['pending', 'approved', 'not issued']
+
+  validates :status, inclusion: { in: VALID_STATUSES }
 
 end

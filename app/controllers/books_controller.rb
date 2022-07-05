@@ -55,27 +55,33 @@ class BooksController < ApplicationController
   end
 
   def issue_book_request
-    @book.update_attribute(:issue_request, true)
-    current_user.book_requests << @book
-    redirect_to book_path(@book), notice: "Book request sent to admin for approval"
+    if @book.status == "approved"
+      redirect_to book_path(@book), notice: "Already issued, please issue other books"
+    else
+      @book.update_attribute(:issue_request, true)
+      @book.update_attribute(:status, "pending")
+      current_user.book_requests << @book
+      redirect_to book_path(@book), notice: "Book request sent to admin for approval"
+    end
   end
 
   def cancel_book_request
+    @book.update_attribute(:status, "not issued")
     @book.update_attribute(:issue_request, false)
     current_user.book_requests.delete(@book)
-    redirect_to book_path(@book), notice: "Book request cancelled successfully"
+    redirect_to book_path(@book), notice: "Book request cancelled"
   end
 
   def approve_book_request
     @book.update_attribute(:status, "approved")
-    current_user.book_requests << @book
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
   def reject_book_request
-    @book.update_attribute(:status, "rejected")
+    @book.update_attribute(:status, "not issued")
+    @book.update_attribute(:issue_request, false)
     current_user.book_requests.delete(@book)
-    redirect_to book_collections_path, notice: "Book request is rejected"
+    redirect_to book_path(@book), notice: "Book request rejected"
   end
 
   private

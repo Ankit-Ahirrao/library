@@ -1,13 +1,16 @@
 
 <h2><strong>Book Approval Requests</strong></h2><br><br>
-<%= form_with model: @book do |form| %>
+
+<%= form_with url: book_collections_status_path, method: :post do |form| %> 
   <div class="container">
     <%= form.label :status, class: "logg"%><br>
-    <%= form.number_field :status%>
+    <%= form.select :status, ['pending', 'approved'], selected: 'pending' %>
 
     <%= form.submit "submit", class: "logg" %><br><br>
   </div>
 <%end%>
+
+
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -15,20 +18,27 @@
         <th scope="col">Book ID</th>
         <th scope="col">Book Title</th>
         <th scope="col">User</th>
+        <th scope="col">Status</th>
         <th scope="col">Date</th>
-        <th scope="col">Want to approve?</th>
-        <th scope="col">Want to reject?</th>
+        <th scope="col">Approve or Reject</th>
       </tr>
     </thead>
     <tbody>
       <% @book_collections.each do |request| %>
         <tr>
+          
             <td><%= request.book.id %></td>
             <td><%= link_to request.book.title, book_path(request.book.id) %></td>
             <td><%= request.user.name %></td>
+            <td><%= request.status %></td>
             <td><%= request.created_at %></td>
-            <td><%= link_to "Approve", approved_book_path(request.book.id) %></td>
-            <td><%= link_to "Reject", rejected_book_path(request.book.id) %></td>
+            <td><% if request.book.status == "approved" %>
+                  Approved!  <%= link_to " You can reject if", rejected_book_path(request.book.id) %>
+                <% else %>
+                  <%= link_to "Approve", approved_book_path(request.book.id) %> |
+                  <%= link_to "Reject", rejected_book_path(request.book.id) %>
+                <% end %></td>
+         
         </tr>
       <% end %>
     </tbody>
