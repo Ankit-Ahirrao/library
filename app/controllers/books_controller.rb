@@ -61,6 +61,7 @@ class BooksController < ApplicationController
       @book.update_attribute(:issue_request, true)
       @book.update_attribute(:status, "pending")
       current_user.book_requests << @book
+      BookMailer.issue(current_user, @book).deliver
       redirect_to book_path(@book), notice: "Book request sent to admin for approval"
     end
   end
@@ -69,11 +70,13 @@ class BooksController < ApplicationController
     @book.update_attribute(:status, "not issued")
     @book.update_attribute(:issue_request, false)
     current_user.book_requests.delete(@book)
+    BookMailer.cancel(current_user, @book).deliver
     redirect_to book_path(@book), notice: "Book request cancelled"
   end
 
   def approve_book_request
     @book.update_attribute(:status, "approved")
+    BookMailer.approve(current_user, @book).deliver
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
