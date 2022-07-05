@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   #get 'book_collections/rejected', to: "book_collections#get_status"
   
   root 'static_pages#home'
-  devise_for :users 
+  devise_for :users, controllers: {
+    confirmations: 'users/confirmations'
+  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :books do 
     member do 
