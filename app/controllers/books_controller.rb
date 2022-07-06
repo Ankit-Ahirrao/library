@@ -8,7 +8,10 @@ class BooksController < ApplicationController
     @books = Book.paginate(page: params[:page])
   end
 
-  def show 
+  def show
+    if @book.issue_request && !current_user
+      redirect_to books_path, notice: "This book is issued by other user, please check another books"
+    end 
   end
 
   def new
@@ -57,6 +60,8 @@ class BooksController < ApplicationController
   def issue_book_request
     if @book.status == "approved"
       redirect_to book_path(@book), notice: "Already issued, please issue other books"
+    elsif @book.status == "pending"
+      redirect_to book_path(@book), notice: "This book is requested by other user, please issue other books"
     else
       @book.update_attribute(:issue_request, true)
       @book.update_attribute(:status, "pending")
