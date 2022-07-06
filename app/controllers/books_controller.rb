@@ -57,28 +57,22 @@ class BooksController < ApplicationController
   end
 
   def issue_book_request
-    if @book.approved?
-      redirect_to book_path(@book), notice: "Already issued, please issue other books"
-    elsif @book.pending?
-      redirect_to book_path(@book), notice: "This book is requested by other user, please issue other books"
-    else
-      @book.update(issue_request: true, status: "pending")
-      current_user.book_requests << @book
-      BookMailer.issue(current_user, @book).deliver
-      redirect_to book_path(@book), notice: "Book request sent to admin for approval"
-    end
+    @book.update(issue_request: true, status: "pending")
+    current_user.book_requests << @book
+    BookMailer.send_mail(current_user, @book, "Book Issue Request", "admin@gmail.com", current_user.email).deliver
+    redirect_to book_path(@book), notice: "Book request sent to admin for approval"
   end
 
   def cancel_book_request
     @book.update(issue_request: false, status: "not issued")
     current_user.book_requests.delete(@book)
-    BookMailer.cancel(current_user, @book).deliver
+    BookMailer.send_mail(current_user, @book, "Book Request Cancelled", current_user.email, "noreply@example.com").deliver
     redirect_to book_path(@book), notice: "Book request cancelled"
   end
 
   def approve_book_request
     @book.update(status: "approved")
-    BookMailer.approve(current_user, @book).deliver
+    BookMailer.send_mail(current_user, @book, "Book Request Approved", current_user.email, "admin@gmail.com").deliver
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 

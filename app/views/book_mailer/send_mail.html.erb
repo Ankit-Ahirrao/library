@@ -1,0 +1,20 @@
+<% if @subject == "Book Request Approved" %>
+  <h1>Book Request Approved</h1>
+  <p>
+    Hi <%= @user.name %>, Admin has approved your <%= @book.title %> book request. Happy Reading!!!
+  </p>
+  <h4>Thanks</h4>
+<% elsif @subject == "Book Request Cancelled" %>
+  <h1>Book Request Cancel</h1>
+  <p>
+    Hi <%= @user.name %>, your <%= @book.title %> book request has cancelled. You can issue other books!!
+  </p>
+  <h4>Thanks</h4>
+<% else %>
+  <h1>Book Issue Request</h1>
+  <p>
+    Dear Admin, <%= @user.name %> has requested <%= @book.title %> book. Please check and do the needfull.
+  </p>
+  <h4>Thanks</h4>
+<% end %>
+
