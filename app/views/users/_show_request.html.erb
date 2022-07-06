@@ -1,21 +1,21 @@
 <div class="container"> 
   <div class="row">
     <div class="col-sm">
-      <strong>Books requested by you: </strong>
+      <strong>Requested Books: </strong>
       <ul>
         <% current_user.book_requests.each do |book| %>
           <% if book.status == 'pending' %>
-            <li><%= link_to book.title %></li>
+            <li><%= link_to book.title, book_path(book) %></li>
           <% end %>
         <% end %>
       </ul>
     </div><br>
     <div class="col-sm">
-      <strong>Approved books:  </strong>
+      <strong>Approved Books:  </strong>
       <ul>
         <% current_user.book_requests.each do |book| %>
           <% if book.status == 'approved' %>
-            <li><%= link_to book.title %></li>
+            <li><%= link_to book.title, book_path(book) %></li>
           <% end %>    
         <% end %>
       </ul>

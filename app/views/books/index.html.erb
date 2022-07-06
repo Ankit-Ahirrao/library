@@ -4,10 +4,13 @@
     <%= will_paginate %>
     <ul> 
       <% @books.each do |book| %>
-        <li>
-          <%= link_to book.title, book_url(book) %>
-        </li>
-        <br>
+        <% if admin? %>
+          <li><%= link_to book.title, book_url(book) %></li><br>
+        <% else %>
+          <% if book.not_issued? %>
+            <li><%= link_to book.title, book_url(book) %></li><br>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
     <%= will_paginate %>
