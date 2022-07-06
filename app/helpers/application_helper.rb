@@ -8,5 +8,4 @@ module ApplicationHelper
     user && user == current_user
   end
 
-  
 end

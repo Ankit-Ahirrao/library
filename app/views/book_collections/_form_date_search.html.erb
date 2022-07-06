@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="pull-right range-query">
+    <%= form_tag book_collections_path, method: :get do %>
+      <%= text_field_tag 'search[date_from]', @book_collections.date_from %>
+      <%= text_field_tag 'search[date_to]', @book_collections.date_to %>
+      <%= submit_tag 'Search', class: 'btn search-button' %>
+    <% end %>
+  </div>
+</div>

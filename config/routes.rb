@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  get 'book_collections', to: "book_collections#index"
-  post 'book_collections/status', to: "book_collections#get_status"
-  get 'show_approved_books', to: "book_collections#show"
-  #get 'book_collections/pending', to: "book_collections#get_status"
-  #et 'book_collections/approved', to: "book_collections#get_status"
-  #get 'book_collections/rejected', to: "book_collections#get_status"
   
-  root 'static_pages#home'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations'
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root 'static_pages#home'
   resources :books do 
     member do 
       get 'issue', to: "books#issue_book_request"
@@ -20,5 +14,8 @@ Rails.application.routes.draw do
     end
   end
   
+  get 'book_collections', to: "book_collections#index"
+  post 'book_collections/status', to: "book_collections#get_status"
+  get 'show_approved_books', to: "book_collections#show"
 
 end

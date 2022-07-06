@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  #before_action :admin?, only: [:new, :edit, :destory]
+
+  before_action :authenticate_user!, except: [:index]
   before_action :find_book, only: %i[show reject_book_request issue_book_request approve_book_request
     cancel_book_request]
   
@@ -25,8 +25,7 @@ class BooksController < ApplicationController
   def edit
     unless admin?
       redirect_to book_url, notice: "Only Admins can edit book details"
-    end
-
+    end 
     @book = current_user.books.find(params[:id])
   end
 
@@ -49,7 +48,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    if admin? 
+    if admin?
       current_user.books.find(params[:id]).destroy
       redirect_to books_url, notice: "Book is destroyed"
     else
@@ -58,13 +57,12 @@ class BooksController < ApplicationController
   end
 
   def issue_book_request
-    if @book.status == "approved"
+    if @book.approved?
       redirect_to book_path(@book), notice: "Already issued, please issue other books"
-    elsif @book.status == "pending"
+    elsif @book.pending?
       redirect_to book_path(@book), notice: "This book is requested by other user, please issue other books"
     else
-      @book.update_attribute(:issue_request, true)
-      @book.update_attribute(:status, "pending")
+      @book.update(issue_request: true, status: "pending")
       current_user.book_requests << @book
       BookMailer.issue(current_user, @book).deliver
       redirect_to book_path(@book), notice: "Book request sent to admin for approval"
@@ -72,22 +70,20 @@ class BooksController < ApplicationController
   end
 
   def cancel_book_request
-    @book.update_attribute(:status, "not issued")
-    @book.update_attribute(:issue_request, false)
+    @book.update(issue_request: false, status: "not issued")
     current_user.book_requests.delete(@book)
     BookMailer.cancel(current_user, @book).deliver
     redirect_to book_path(@book), notice: "Book request cancelled"
   end
 
   def approve_book_request
-    @book.update_attribute(:status, "approved")
+    @book.update(status: "approved")
     BookMailer.approve(current_user, @book).deliver
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
   def reject_book_request
-    @book.update_attribute(:status, "not issued")
-    @book.update_attribute(:issue_request, false)
+    @book.update(issue_request: false, status: "not issued")
     current_user.book_requests.delete(@book)
     redirect_to book_path(@book), notice: "Book request rejected"
   end
@@ -100,4 +96,5 @@ class BooksController < ApplicationController
     def find_book
       @book = Book.find(params[:id])
     end
+
 end

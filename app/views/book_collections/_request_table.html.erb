@@ -1,0 +1,29 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Book ID</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">User</th>
+      <th scope="col">Date</th>
+      <th scope="col">Approve or Reject</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @book_collections.each do |request| %>
+      <tr>    
+        <td><%= request.book.id %></td>
+        <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+        <td><%= request.user.name %></td>
+        <td><%= request.created_at %></td>
+        <td><% if request.book.status == "approved" %>
+              Approved!  <%= link_to " You can reject if", rejected_book_path(request.book.id) %>
+            <% elsif request.book.status == "not issued" && !request.book.issue_request %>
+              Rejected
+            <% else %>
+              <%= link_to "Approve", approved_book_path(request.book.id,request.user.id) %> |
+              <%= link_to "Reject", rejected_book_path(request.book.id) %>
+            <% end %></td>     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
