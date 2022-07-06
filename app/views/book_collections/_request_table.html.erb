@@ -15,9 +15,9 @@
         <td><%= link_to request.book.title, book_path(request.book.id) %></td>
         <td><%= request.user.name %></td>
         <td><%= request.created_at %></td>
-        <td><% if request.book.status == "approved" %>
+        <td><% if request.book.approved? %>
               Approved!  <%= link_to " You can reject if", rejected_book_path(request.book.id) %>
-            <% elsif request.book.status == "not issued" && !request.book.issue_request %>
+            <% elsif request.book.not_issued? && !request.book.issue_request %>
               Rejected
             <% else %>
               <%= link_to "Approve", approved_book_path(request.book.id,request.user.id) %> |
