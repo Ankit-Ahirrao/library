@@ -1,13 +1,7 @@
 <div class="container">
   <h2><strong>Book Approval Requests</strong></h2><br><br>
   <%= button_to "Check all approved requests", show_approved_books_path, method: :get %><br><br>
-  <%= form_with url: book_collections_status_path, method: :post do |form| %> 
-    <div class="container">
-      <%= form.label :status, class: "logg"%><br>
-      <%= form.select :status, ['pending', 'approved'], selected: 'pending' %>
-      <%= form.submit "submit", class: "logg" %>
-    </div>
-  <%end%>
+  <%= render 'book_collections/form_status' %>
   <table class="table">
     <thead class="thead-dark">
       <tr>

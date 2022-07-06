@@ -1,0 +1,7 @@
+<%= form_with url: book_collections_status_path, method: :post do |form| %> 
+  <div class="container">
+    <%= form.label :status, class: "logg"%><br>
+    <%= form.select :status, ['pending', 'approved'], selected: 'pending' %>
+    <%= form.submit "submit", class: "logg" %>
+  </div>
+<%end%>
