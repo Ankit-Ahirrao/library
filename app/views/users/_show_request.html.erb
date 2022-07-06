@@ -1,7 +1,7 @@
 <div class="container"> 
   <div class="row">
     <div class="col-sm">
-      <strong>List of book requested by you </strong>
+      <strong>Books requested by you: </strong>
       <ul>
         <% current_user.book_requests.each do |book| %>
           <% if book.status == 'pending' %>
@@ -11,7 +11,7 @@
       </ul>
     </div><br>
     <div class="col-sm">
-      <strong>List of book approved! </strong>
+      <strong>Approved books:  </strong>
       <ul>
         <% current_user.book_requests.each do |book| %>
           <% if book.status == 'approved' %>

@@ -1,20 +1,16 @@
 <div class="container">
-<h3>Welcome, <%= current_user.name %></h3>
-<br>
-<% if admin? %>
-  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <%= link_to "Book approval request", book_collections_path, class: "btn-sm btn-primary"%>
-  <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
-
-<% elsif !admin? && current_user.book_requests.count > 0 %>
-  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <br><br><br>
-  <%= render 'users/show_request' %>
+  <h3>Welcome, <%= current_user.name %></h3><br>
   
-<% else %>
-  <strong>You don't have any requested book. Issue books from the list.</strong><br><br>
-  <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
-  <br><br>
+  <% if admin? %>
+    <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%>
+    <%= link_to "Book approval request", book_collections_path, class: "btn-sm btn-primary"%>
+    <%= link_to "Add book", new_book_path, class: "btn-sm btn-primary"%>
+  <% elsif !admin? && current_user.book_requests.count > 0 %>
+    <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%><br><br><br>
+    <%= render 'users/show_request' %>
+  <% else %>
+    <strong>You don't have any requested book. Issue books from the list.</strong><br><br>
+    <%= link_to "Sell all the books", books_path, class: "btn-sm btn-primary"%><br><br>
+  <% end %>
   
-<% end %>
 </div>
