@@ -8,8 +8,6 @@
           <li><%= link_to book.title, book_url(book) %></li><br>
         <% elsif book.not_issued? %>
           <li><%= link_to book.title, book_url(book) %></li><br>
-        <% else %>
-          Books out of stock, Please come later!
         <% end %>
       <% end %>
     </ul>

@@ -8,11 +8,11 @@
     <%= link_to "Edit book", edit_book_path(@book), class: "btn-primary" %> | 
     <%= link_to "Delete book", book_path(@book), method: :delete, class: "btn-primary" %>
   <% else %>
-    <% if !@book.issue_request && @book.status=="not issued" %>
+    <% if !@book.issue_request && @book.not_issued? %>
       <%= link_to "Request", issue_book_path(@book), class: "btn-primary" %> |
-    <% elsif @book.issue_request && @book.status=="pending" %>
+    <% elsif @book.issue_request && @book.pending? %>
       <%= link_to "Cancel",cancel_book_path(@book), class: "btn-primary" %>
-    <% elsif @book.issue_request && @book.status=="approved" %>
+    <% elsif @book.issue_request && @book.approved? %>
       <%= link_to "Approved", "#", class: "btn-primary" %>
     <% elsif @book.issue_request && @book.status=="rejected" %>
       <%= link_to "Rejected", "#", class: "btn-primary" %>

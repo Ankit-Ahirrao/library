@@ -79,7 +79,7 @@ class BooksController < ApplicationController
   def reject_book_request
     @book.update(issue_request: false, status: "not issued")
     current_user.book_requests.delete(@book)
-    redirect_to book_path(@book), notice: "Book request rejected"
+    redirect_to book_path(@book), notice: "Book request is rejected"
   end
 
   private
