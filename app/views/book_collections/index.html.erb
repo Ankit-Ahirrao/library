@@ -1,7 +1,6 @@
 <div class="container">
-  <h2><strong>Book Approval Requests</strong></h2><br><br>
+  <h2><strong>Book Approval Requests</strong></h2><br>
 
-  <%= button_to "Check all approved requests", show_approved_books_path, method: :get %><br><br>
   <%= render 'book_collections/form_status' %>
   <%#render 'book_collections/form_date_search' %>
   <%= render 'book_collections/request_table' %>

@@ -1,0 +1,37 @@
+<div class="container">
+  <% if params[:status] == "approved"%>
+   <h2><strong>Approved Requests</strong></h2>
+  <% else %>
+    <h2><strong>Pending Requests</strong></h2>
+  <% end %>
+  <%= button_to "Go back to all requests", book_collections_path, method: :get %><br>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Book ID</th>
+        <th scope="col">Book Title</th>
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        <th scope="col">Approve or Reject</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @book_statues.each do |request| %>
+        <tr>    
+          <td><%= request.book.id %></td>
+          <td><%= link_to request.book.title, book_path(request.book.id) %></td>
+          <td><%= request.user.name %></td>
+          <td><%= request.created_at %></td>
+          <td><% if request.book.approved? %>
+                Approved!  <%= link_to " You can reject if", rejected_book_path(request.book.id) %>
+              <% elsif request.book.not_issued? && !request.book.issue_request %>
+                Rejected
+              <% else %>
+                <%= link_to "Approve", approved_book_path(request.book.id) %> |
+                <%= link_to "Reject", rejected_book_path(request.book.id) %>
+              <% end %></td>     
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

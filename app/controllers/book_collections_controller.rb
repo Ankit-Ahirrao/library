@@ -4,11 +4,7 @@ class BookCollectionsController < ApplicationController
     @book_collections = BookCollection.all
   end
 
-  def show_approved_books
-    @book_collections = BookCollection.all
-  end
-
   def get_status 
-    @book_statues = BookCollection.includes(:users, :books).where('books.status = ?', params[:status])
+    @book_statues = BookCollection.includes(:user, :book).where("books.status = ?", params[:status]).references(:books) 
   end
 end
