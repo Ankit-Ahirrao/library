@@ -6,15 +6,17 @@
       <% @books.each do |book| %>
         <% if admin? %>
           <li><%= link_to book.title, book_url(book) %></li><br>
+        <% elsif book.not_issued? %>
+          <li><%= link_to book.title, book_url(book) %></li><br>
         <% else %>
-          <% if book.not_issued? %>
-            <li><%= link_to book.title, book_url(book) %></li><br>
-          <% end %>
+          Books out of stock, Please come later!
         <% end %>
       <% end %>
     </ul>
     <%= will_paginate %>
+  <% elsif admin? %>
+    Books not available. Please add some books!
   <% else %>
-    Books not available. Please add some books.
+    Books out of stock, Please come later!
   <% end %>
 </div>

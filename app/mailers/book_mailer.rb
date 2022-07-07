@@ -6,5 +6,4 @@ class BookMailer < ApplicationMailer
     @subject = subject
     mail to: to_email, from: from_email, subject: subject
   end
-  
 end

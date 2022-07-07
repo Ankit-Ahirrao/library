@@ -14,12 +14,12 @@
     <tbody>
       <% @book_collections.each do |request| %>
         <tr>
-          <% if request.book.issue_request && request.book.approved? %>
+          <%if request.book.issue_request && request.book.approved? %>
             <td><%= request.book.id %></td>
             <td><%= link_to request.book.title, book_path(request.book.id) %></td>
             <td><%= request.user.name %></td>
             <td><%= request.created_at %></td>
-          <% end %>
+          <%end %>
         </tr>
       <% end %>
     </tbody>

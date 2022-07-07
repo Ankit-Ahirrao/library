@@ -72,7 +72,7 @@ class BooksController < ApplicationController
 
   def approve_book_request
     @book.update(status: "approved")
-    BookMailer.send_mail(current_user, @book, "Book Request Approved", current_user.email, "admin@gmail.com").deliver
+    BookMailer.send_mail(@book.user, @book, "Book Request Approved", @book.user.email, "admin@gmail.com").deliver
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
@@ -90,5 +90,4 @@ class BooksController < ApplicationController
     def find_book
       @book = Book.find(params[:id])
     end
-
 end

@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   
   get 'book_collections', to: "book_collections#index"
   post 'book_collections/status', to: "book_collections#get_status"
-  get 'show_approved_books', to: "book_collections#show"
+  get 'show_approved_books', to: "book_collections#show_approved_books"
 
 end
