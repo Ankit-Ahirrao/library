@@ -72,7 +72,8 @@ class BooksController < ApplicationController
 
   def approve_book_request
     @book.update(status: "approved")
-    BookMailer.send_mail(@book.user, @book, "Book Request Approved", @book.user.email, "admin@gmail.com").deliver
+    @book_collection = @book.book_requests
+    BookMailer.send_mail(@book_collection.first.name, @book, "Book Request Approved", @book_collection.first.email, "admin@gmail.com").deliver
     redirect_to book_path(@book), notice: "Book request is approved"
   end
 
