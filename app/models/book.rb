@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
 
   belongs_to :user
-  has_many :book_collections
+  has_many :book_collections, dependent: :destroy
   has_many :book_requests, through: :book_collections, source: :user
   
   validates :title, presence: true, length: {maximum: 50} 
