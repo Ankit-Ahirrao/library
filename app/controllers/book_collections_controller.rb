@@ -1,7 +1,8 @@
 class BookCollectionsController < ApplicationController
 
   def index
-    @book_collections = BookCollection.all
+    @search = RequestSearch.new(params[:search])
+    @book_collections = @search.get_request
   end
 
   def get_status 

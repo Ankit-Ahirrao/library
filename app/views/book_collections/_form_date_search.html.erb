@@ -1,17 +1,9 @@
-<!-- <div class="row">
+<div class="row">
   <div class="pull-right range-query">
     <%= form_tag book_collections_path, method: :get do %>
-      <%= text_field_tag 'search[date_from]', @book_collections.date_from %>
-      <%= text_field_tag 'search[date_to]', @book_collections.date_to %>
-      <%= submit_tag 'Search', class: 'btn search-button' %>
+      <%= text_field_tag 'search[date_from]', @search.date_from %>
+      <%= text_field_tag 'search[date_to]', @search.date_to %>
+      <%= submit_tag 'Search', class: 'search-button' %>
     <% end %>
   </div>
 </div>
--->
-<%= form_for(:search, class: 'form-inline', url: book_collections_path, method: :get) do |form| %>
-  <div class="form-group">
-    <%= form.label :created_at %>
-    <%= form.text_field :created_at, class: 'form-control', data: { behavior: 'daterangepicker' } %>
-  </div>
-  <%= form.submit "Search", class: 'btn btn-success' %>
-<% end %>
