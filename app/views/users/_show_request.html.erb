@@ -1,24 +1,29 @@
 <div class="container"> 
   <div class="row">
     <div class="col-sm">
-      <strong>Requested Books: </strong>
-      <ul>
-        <% current_user.book_requests.each do |book| %>
-          <% if book.status == 'pending' %>
-            <li><%= link_to book.title, book_path(book) %></li>
+      <strong>Requested & Approved Books: </strong>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Book ID</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Requested Date</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.book_requests.each do |book| %>
+            <% if !book.not_issued? %>
+              <tr>
+                <td><%= book.id %></td>
+                <td><%= link_to book.title, book_path(book) %></td>
+                <td><%= book.updated_at %></td>
+                <td><%= book.status %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
-    </div><br>
-    <div class="col-sm">
-      <strong>Approved Books:  </strong>
-      <ul>
-        <% current_user.book_requests.each do |book| %>
-          <% if book.status == 'approved' %>
-            <li><%= link_to book.title, book_path(book) %></li>
-          <% end %>    
-        <% end %>
-      </ul>
+        </tbody>
+      </table>
     </div><br>
   </div>
 </div>
