@@ -5,7 +5,7 @@ class BookCollectionsController < ApplicationController
     @book_collections = @search.get_request
   end
 
-  def get_status 
+  def get_status
     @book_statues = BookCollection.includes(:user, :book).where("books.status = ?", params[:status]).references(:books) 
   end
 end

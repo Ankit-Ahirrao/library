@@ -16,12 +16,12 @@
         <td><%= request.user.name %></td>
         <td><%= request.created_at %></td>
         <td><% if request.book.approved? %>
-              Approved!  <%= link_to " You can reject if", rejected_book_path(request.book.id) %>
+              Approved!  <button><%= link_to " You can reject if", rejected_book_path(request.book.id) %></button>
             <% elsif request.book.not_issued? && !request.book.issue_request %>
               Rejected
             <% else %>
-              <%= link_to "Approve", approved_book_path(request.book.id) %> |
-              <%= link_to "Reject", rejected_book_path(request.book.id) %>
+              <button><%= link_to "Approve", approved_book_path(request.book.id), class:"btn-outline-success" %></button> |
+              <button><%= link_to "Reject", rejected_book_path(request.book.id) %></button>
             <% end %></td>     
       </tr>
     <% end %>
