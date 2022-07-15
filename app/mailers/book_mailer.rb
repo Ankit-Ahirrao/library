@@ -1,5 +1,6 @@
-class BookMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class BookMailer < ApplicationMailer
   def send_mail(user, book, subject, to_email, from_email)
     @user = user
     @book = book

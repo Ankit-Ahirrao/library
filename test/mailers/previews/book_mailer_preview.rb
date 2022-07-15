@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Preview all emails at http://localhost:3000/rails/mailers/book_mailer
 class BookMailerPreview < ActionMailer::Preview
-
   # Preview this email at http://localhost:3000/rails/mailers/book_mailer/issue
   def issue
     BookMailer.issue
@@ -15,5 +16,4 @@ class BookMailerPreview < ActionMailer::Preview
   def cancel
     BookMailer.cancel
   end
-
 end

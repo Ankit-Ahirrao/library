@@ -1,6 +1,7 @@
-class RequestSearch < ApplicationRecord
+# frozen_string_literal: true
 
-  attr_reader :date_from, :date_to 
+class RequestSearch < ApplicationRecord
+  attr_reader :date_from, :date_to
 
   def initialize(params)
     params ||= {}
@@ -13,9 +14,10 @@ class RequestSearch < ApplicationRecord
   end
 
   private
-    def parsed_date(date, default)
-      Date.parse(date)
-    rescue ArgumentError, TypeError
-      default
-    end
+
+  def parsed_date(date, default)
+    Date.parse(date)
+  rescue ArgumentError, TypeError
+    default
+  end
 end
