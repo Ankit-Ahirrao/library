@@ -5,12 +5,12 @@
   <p><strong>Description:</strong> <%= @book.description %></p>
 
   <% if admin? %>
-    <button><%= link_to "Edit book", edit_book_path(@book), class: "btn-primary" %></button> | 
-    <button><%= link_to "Delete book", book_path(@book), method: :delete, class: "btn-primary" %></button>
+    <%= link_to "Edit book", edit_book_path(@book), class: "btn-sm btn-primary" %>
+    <%= link_to "Delete book", book_path(@book), method: :delete, class: "btn-sm btn-primary" %>
   <% else %>
     <% value, path = show_book_status_on_button(@book) %>
-    <button><%= link_to value, path, class: "btn-primary" %></button>
+    <%= link_to value, path, class: "btn-sm btn-primary" %>
   <% end %>
   
-  <button><%= link_to "Back", books_path, class: "btn-primary" %></button>
+  <%= link_to "Back", books_path, class: "btn-sm btn-primary" %>
 </div>
