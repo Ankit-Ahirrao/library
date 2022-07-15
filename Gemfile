@@ -15,7 +15,7 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'momentjs-rails'
 gem 'will_paginate'
-
+gem 'rails_best_practices'
 gem 'bootstrap-will_paginate'
 
 gem 'devise'
