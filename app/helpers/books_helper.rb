@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BooksHelper
-  def show_book_status_on_button(book)
+  def button_status(book)
     if !book.issue_request && book.not_issued?
       value = 'Request'
       path = issue_book_path(book)

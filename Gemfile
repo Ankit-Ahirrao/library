@@ -10,8 +10,6 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
-gem 'bootstrap-sass'
-
 gem 'bootstrap-daterangepicker-rails'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
