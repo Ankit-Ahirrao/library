@@ -10,6 +10,7 @@ class Book < ApplicationRecord
   VALID_STATUSES = ['pending', 'approved', 'not issued']
   validates :status, inclusion: { in: VALID_STATUSES }
 
+
   def approved?
     status == "approved"
   end
@@ -21,5 +22,4 @@ class Book < ApplicationRecord
   def not_issued?
     status == "not issued"
   end
-
 end

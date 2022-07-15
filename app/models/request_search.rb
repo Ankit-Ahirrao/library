@@ -13,10 +13,9 @@ class RequestSearch < ApplicationRecord
   end
 
   private
-
-  def parsed_date(date, default)
-    Date.parse(date)
-  rescue ArgumentError, TypeError
-    default
-  end
+    def parsed_date(date, default)
+      Date.parse(date)
+    rescue ArgumentError, TypeError
+      default
+    end
 end
