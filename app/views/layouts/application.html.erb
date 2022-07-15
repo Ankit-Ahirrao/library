@@ -13,7 +13,7 @@
   <body>
     <%= render "layouts/header" %>
     <% if admin? %>
-      Admin logged
+      
     <% end %>
     <% flash.each do |flash_level, message| %>
       <div class="alert alert-<%= flash_level.include?('wrong') ? "danger" : "success" %>"><%= message %></div>

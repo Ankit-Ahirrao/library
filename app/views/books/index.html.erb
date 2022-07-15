@@ -1,13 +1,13 @@
 <div class="container">
-  <h2><strong>Book Lists</strong></h2><br>
+  <h3 id="booklist"><strong>Book Lists </strong></h3><br>
   <% if @books.any? %>
     <%= will_paginate %>
-    <ul> 
+    <ul class="list-group-flush col-md-4"> 
       <% @books.each do |book| %>
         <% if admin? %>
-          <li><%= link_to book.title, book_url(book) %></li><br>
+          <li class="list-group-item"><%= link_to book.title, book_url(book) %></li><br>
         <% elsif book.not_issued? %>
-          <li><%= link_to book.title, book_url(book) %></li><br>
+          <li class="list-group-item"><%= link_to book.title, book_url(book) %></li><br>
         <% end %>
       <% end %>
     </ul>
