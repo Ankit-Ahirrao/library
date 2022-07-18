@@ -9,6 +9,8 @@ class Ability
 
     can :manage, Book if user.is_admin 
     can :read, BookCollection if user.is_admin
+    can :issue_book_request, Book if !user.is_admin
+    can :cancel_book_request, Book if !user.is_admin
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
