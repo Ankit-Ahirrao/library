@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+
+
   belongs_to :user
   has_many :book_collections, dependent: :destroy
   has_many :book_requests, through: :book_collections, source: :user
@@ -10,6 +12,7 @@ class Book < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   VALID_STATUSES = ['pending', 'approved', 'not issued'].freeze
   validates :status, inclusion: { in: VALID_STATUSES }
+
 
   def approved?
     status == 'approved'
@@ -22,4 +25,5 @@ class Book < ApplicationRecord
   def not_issued?
     status == 'not issued'
   end
+
 end

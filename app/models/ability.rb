@@ -2,8 +2,13 @@
 
 class Ability
   include CanCan::Ability
+  include ApplicationHelper
 
   def initialize(user)
+    can :read, Book
+
+    can :manage, Book if user.is_admin 
+    can :read, BookCollection if user.is_admin
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
