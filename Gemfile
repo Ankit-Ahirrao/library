@@ -12,12 +12,12 @@ gem 'pg', '~> 1.1'
 
 gem 'bootstrap-daterangepicker-rails'
 gem 'bootstrap-sass'
-gem 'jquery-rails'
-gem 'momentjs-rails'
-gem 'will_paginate'
-gem 'rails_best_practices'
 gem 'bootstrap-will_paginate'
 gem 'cancancan'
+gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'rails_best_practices'
+gem 'will_paginate'
 
 gem 'devise'
 # Use Puma as the app server
