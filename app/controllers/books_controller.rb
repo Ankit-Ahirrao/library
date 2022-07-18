@@ -58,7 +58,7 @@ class BooksController < ApplicationController
   def issue_book_request
     @book.update(issue_request: true, status: 'pending')
     current_user.book_requests << @book
-    BookMailer.send_mail(current_user, @book, 'Book Issue Request', 'ahirraoankit5@gmail.com',
+    BookMailer.send_mail(current_user, @book, 'Book Issue Request', 'admin@gmail.com',
                          current_user.email).deliver
     redirect_to book_path(@book), notice: 'Book request sent to admin for approval'
   end
