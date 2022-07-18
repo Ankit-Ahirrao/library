@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :find_book, only: %i[show reject_book_request issue_book_request approve_book_request
                                      cancel_book_request]
