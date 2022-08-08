@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   
   before(:all) do 
-    user1 = create(:user)
+    @user1 = create(:user)
   end
 
   it "has valid attributes" do
-    expect(user1).to be_valid
+    expect(@user1).to be_valid
   end
 
   it "has a unique email address" do 
-    user = build(:user, email: "ankit45@gmail.com")
+    user = build(:user, email: "ankit100@gmail.com")
     expect(user).to_not be_valid
   end
 

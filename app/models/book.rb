@@ -2,7 +2,6 @@
 
 class Book < ApplicationRecord
 
-
   belongs_to :user
   has_many :book_collections, dependent: :destroy
   has_many :book_requests, through: :book_collections, source: :user
